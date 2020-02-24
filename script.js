@@ -1,6 +1,7 @@
 // 6ce41007f9563dde23befa59a0baa050
 // Sydney 260
 // burger 168
+// Mary "16566183"
 
 
 const today = document.getElementById('currentWeather')
@@ -58,4 +59,34 @@ const showRestaurant = (aList) => {
     <p>${item.rating}/5</p><p>${item.price} </p></article>`
 
   })
+}
+const review = (number) => {
+  const url = `https://developers.zomato.com/api/v2.1/reviews?res_id=${number}`
+  fetch(url, { headers: { "user-Key": apiKey } })
+    .then(res => res.json())
+    .then(json => {
+      console.log(json)
+
+      const myReviews = reviewObject(json)
+
+    })
+
+}
+
+review("16566183")
+const reviewObject = (object) => {
+  const newList = []
+  newList.push(object.reviews_count)
+  const reviewList = object.user_reviews
+  reviewList.forEach((item) => {
+    newList.push({
+      ratingN: item.review.rating,
+      ratingT: item.review.rating_text,
+      name: item.review.user.name,
+      date: (new Date(item.review.timestamp * 1000)).toUTCString()
+    })
+
+  })
+  console.log(newList)
+  return newList
 }
