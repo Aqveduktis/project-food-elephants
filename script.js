@@ -52,7 +52,10 @@ const restaurantList = (Alist) => {
 const showRestaurant = (aList) => {
   const gridBox = document.getElementById('gridRestaurant')
   aList.forEach((item) => {
-    gridBox.innerHTML += `<article><img src="${item.photo}"><p>${item.name}</p><p>${item.offers.toString()}</p><p>${item.rating}/5</p><p>${item.price}</p></article>`
+    let offers = item.offers.map(offer => `<span> ${offer}</span>`);
+    gridBox.innerHTML += `<article><img src="${item.photo}"><p>${item.name}</p>
+    <p>${offers}</p>
+    <p>${item.rating}/5</p><p>${item.price} </p></article>`
 
   })
 }
