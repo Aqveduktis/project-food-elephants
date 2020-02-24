@@ -1,3 +1,6 @@
+https://festive-wright-c611f5.netlify.com/
+
+
 # Build a Food Review website 🌮🥑
 
 During this week we will meet-up in Sthlm – YAY! During those days we will practice our JavaScript and API skills a bit more. We will also practice working as a real team using GitHub. You will experience, first-hand, the issues and struggles that can occur when working together with code. 
@@ -6,9 +9,11 @@ During the session your team will be challenged to build a website that lists re
 
 Your page will be built based on a random combination of cuisine, city, and design provided by the Technigo team on site. All data should be fetched from the [Zomato API.](https://developers.zomato.com/)  
 
-## Your team's combination: [cuisine] restaurants in [city]
+## Your team's combination: Burger restaurants in Sydney, Australia
 
-Your team has been tasked with using the Zomato API to list [cuisine] restaurants in [city]
+Your team has been tasked with using the Zomato API to list Burger restaurants in Sydney, Australia in the style of the Online Pizza site:
+
+![Online Pizza](https://i.imgur.com/CVh3zi0.jpg)
 
 ## How to complete this task
 
@@ -68,13 +73,7 @@ Make it so your users can choose to only show restaurants with good ratings.
 
 To work on mobile, desktop or tablet. 
 
-Feel free to challenge yourself and team to come up with more or other features! This is your group project – you decided. 
-
-### Feature freeze 
-
-There's a thing called [feature freeze.](https://en.wikipedia.org/wiki/Freeze_(software_engineering)), our feature freeze will be 2 hours before the demo. That's when it's time for you to merge your feature branches into the master branch. Our teachers will have a bit of a though time, since it's guaranteed there will be conflicts in your code (which happens when the same code is edited in two different branches). So expect merge conflicts at this point!
-
-Once all the feature branches are merged into master, you're free to try and make smaller changes to your site and fix bugs - but be careful to make sure it'll be demoable. 
+Feel free to challenge yourself and team to come up with more or other features! This is your group project – you decide.
 
 Work as a team!  
 
