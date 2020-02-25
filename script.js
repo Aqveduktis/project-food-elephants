@@ -1,8 +1,3 @@
-// 6ce41007f9563dde23befa59a0baa050
-// Sydney 260
-// burger 168
-
-
 const today = document.getElementById('currentWeather')
 const CityId = 260;
 const CousineId = 168;
@@ -46,11 +41,7 @@ const restaurantList = (Alist) => {
     })
 
   });
-
-
-  console.log(newList)
   return newList
-
 }
 
 const showRestaurant = (aList) => {
@@ -65,7 +56,6 @@ const showRestaurant = (aList) => {
       <p>${item.name}</p>
       <!-- <p>${offers}</p> -->
       <p>${item.rating}/5</p><p>${item.price} </p>
-      
     </section>
     </article>`
   })
@@ -80,8 +70,6 @@ const bookFilter = (arr) => {
     return item.bookTable == 1
     
   })
-  console.log(bookableTables)
-
   gridBox.innerHTML = ''
   bookableTables.forEach((item) => {
     let offers = item.offers.map(offer => `<span> ${offer}</span>`);
@@ -94,15 +82,12 @@ const bookFilter = (arr) => {
       <p>${item.name}</p>
       <!-- <p>${offers}</p> -->
       <p>${item.rating}/5</p><p>${item.price} </p>
-      
     </section>
-    
     </article>`
-    
   })
 
   return bookableTables
 }
-// filterBook.addEventListener('click', bookFilter(aList))
+
 filterBook.addEventListener('click', () => bookFilter(myList))
 clearBtn.addEventListener('click', () => clearFunction())
