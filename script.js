@@ -54,7 +54,7 @@ const showRestaurant = (aList) => {
   const gridBox = document.getElementById('gridRestaurant')
   aList.forEach((item) => {
     let offers = item.offers.map(offer => `<span> ${offer}</span>`);
-    gridBox.innerHTML += `<article><img src="${item.photo}"><p>${item.name}</p>
+    gridBox.innerHTML += `<article class="small-card"><img src="${item.photo}"><p>${item.name}</p>
     <p>${offers}</p>
     <p>${item.rating}/5</p><p>${item.price} </p>
     <p>${item.bookTable}</p>

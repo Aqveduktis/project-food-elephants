@@ -1,0 +1,22 @@
+* { 
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.small-card {
+  width: 20vw;
+  height: 15vh;
+}
+
+img {
+  height: 5vh;
+  width: 5vw;
+}
