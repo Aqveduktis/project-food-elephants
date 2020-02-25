@@ -1,14 +1,12 @@
-// 6ce41007f9563dde23befa59a0baa050
-// Sydney 260
-// burger 168
-// Mary "16566183"
-
-
 const today = document.getElementById('currentWeather')
 const CityId = 260;
 const CousineId = 168;
 const apiKey = "6ce41007f9563dde23befa59a0baa050";
+const filterBook = document.getElementById('bookClicked')
+const clearBtn = document.getElementById('resetBtn')
+const gridBox = document.getElementById('gridRestaurant')
 
+let myList
 
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${CityId}&entity_type=city&cuisines=${CousineId}&start=0&count=20`
 
@@ -33,11 +31,6 @@ const fetchRestaurants = () => {
 
 
       });
-
-      document.getElementById("revealButton").addEventListener('click', (e) => {
-        e.preventDefault()
-        revealMystery(mystery)
-      })
     })
 }
 
@@ -55,16 +48,11 @@ const restaurantList = (Alist) => {
       offers: element.restaurant.highlights,
       rating: element.restaurant.user_rating.aggregate_rating,
       ratingT: element.restaurant.user_rating.rating_text,
-
-
+      bookTable: element.restaurant.is_table_reservation_supported
     })
 
   });
-
-
-  console.log(newList)
   return newList
-
 }
 
 const showRestaurant = (aList) => {
@@ -72,7 +60,7 @@ const showRestaurant = (aList) => {
   aList.forEach((item, index, arr) => {
     let offers = item.offers.map(offer => `<span> ${offer}</span>`);
     gridBox.innerHTML += `<article id="art${item.id}"><img src="${item.photo}"><p>${item.name}</p>
-    <p>${offers}</p>
+    <!--  <p>${offers}</p> -->
     <p>${item.rating}/5</p><p>${item.price} </p></article>`
 
   })
@@ -131,7 +119,7 @@ const showRev = (alist) => {
   myBox.innerHTML += `<h3>Reviews</h3>`
   alist.forEach((item, index) => {
     if (index > 1) {
-      myBox.innerHTML += `<p>Rating: ${item.ratingT}, User: ${item.name}, Date: ${item.date}</p>`
+      myBox.innerHTML += `<p>Rating: ${item.ratingT}, User: ${item.name}</p>`
     }
 
 
@@ -152,29 +140,47 @@ const filterRate = (arr) => {
 
   filterList.forEach((item, index, arr) => {
     let offers = item.offers.map(offer => `<span> ${offer}</span>`);
-    gridBox.innerHTML += `<article id="art${item.id}"><img src="${item.photo}"><p>${item.name}</p>
-    <p>${offers}</p>
-    <p>${item.rating}/5</p><p>${item.price} </p></article>`
-
+    gridBox.innerHTML += `<article id="art${item.id}" class="small-card">
+    <section>
+      <img src="${item.photo}">
+    </section>
+    
+    <section>
+      <p>${item.name}</p>
+      <!-- <p>${offers}</p> -->
+      <p>${item.rating}/5</p><p>${item.price} </p>
+    </section>
+    </article>`
   })
-
-
 }
 
+const clearFunction = () => {
+  location.reload()
+}
 
-// const costFunction = (aList) => {
-//   costArray = []
-//   aList.forEach((item) => {
-//     costArray.push({ id: item.id, cost: item.cost })
-//   })  console.log(costArray)
-//   return costArray
-// }
+const bookFilter = (arr) => {
+  const bookableTables = arr.filter((item) => {
+    return item.bookTable == 1
+    
+  })
+  gridBox.innerHTML = ''
+  bookableTables.forEach((item) => {
+    let offers = item.offers.map(offer => `<span> ${offer}</span>`);
+    gridBox.innerHTML += `<article class="small-card">
+    <section>
+      <img src="${item.photo}">
+    </section>
+    
+    <section>
+      <p>${item.name}</p>
+      <!-- <p>${offers}</p> -->
+      <p>${item.rating}/5</p><p>${item.price} </p>
+    </section>
+    </article>`
+  })
 
-// const bookFilter = (arr) => {
-//   const bookableTables = arr.filter((item) => {
-//     return item.bookTable == 1
+  return bookableTables
+}
 
-//   })
-//   console.log(bookableTables)
-//   return bookableTables
-// }
+filterBook.addEventListener('click', () => bookFilter(myList))
+clearBtn.addEventListener('click', () => clearFunction())
