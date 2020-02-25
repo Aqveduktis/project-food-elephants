@@ -20,13 +20,24 @@ const fetchRestaurants = () => {
     .then(json => {
       console.log(json.restaurants)
       myList = restaurantList(json.restaurants)
-      const listF = filterRate(myList)
+      //const listF = filterRate(myList)
 
-      showRestaurant(listF)
+      showRestaurant(myList)
 
       reviewFunc(myList)
       //review("16566183")
+      object = document.getElementById('filter')
+      object.addEventListener("click", (e) => {
+        e.preventDefault()
+        filterRate(myList)
 
+
+      });
+
+      document.getElementById("revealButton").addEventListener('click', (e) => {
+        e.preventDefault()
+        revealMystery(mystery)
+      })
     })
 }
 
@@ -66,6 +77,14 @@ const showRestaurant = (aList) => {
 
   })
 }
+
+// const listFunction = (fullList, smallList) => {
+//   const gridBox = document.getElementById('gridRestaurant')
+//   gridBox.innerHTML = ""
+
+// }
+
+
 const reviewFunc = (aList) => {
 
   aList.forEach((item) => {
@@ -122,12 +141,23 @@ const showRev = (alist) => {
 }
 
 const filterRate = (arr) => {
+  const gridBox = document.getElementById('gridRestaurant')
+  gridBox.innerHTML = ""
   const filterList = arr.filter((item) => {
     return (parseFloat(item.rating) > 4.5)
   })
 
   console.log("filteredlist,", filterList)
-  return filterList
+
+
+  filterList.forEach((item, index, arr) => {
+    let offers = item.offers.map(offer => `<span> ${offer}</span>`);
+    gridBox.innerHTML += `<article id="art${item.id}"><img src="${item.photo}"><p>${item.name}</p>
+    <p>${offers}</p>
+    <p>${item.rating}/5</p><p>${item.price} </p></article>`
+
+  })
+
 
 }
 
