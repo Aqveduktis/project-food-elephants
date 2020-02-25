@@ -12,6 +12,11 @@ text-transform: uppercase;
 letter-spacing: 1vw;
 }
 
+button {
+  font-size: 20px;
+  padding: 10px;
+}
+
 .bottomBorder {
   border-bottom: 2px solid black;
   height: 10vh;
