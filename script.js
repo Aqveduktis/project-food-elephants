@@ -22,6 +22,8 @@ const fetchRestaurants = () => {
       myList = restaurantList(json.restaurants)
       showRestaurant(myList)
 
+
+      review("16566183")
     })
 }
 
@@ -38,7 +40,8 @@ const restaurantList = (Alist) => {
       photo: element.restaurant.featured_image,
       offers: element.restaurant.highlights,
       rating: element.restaurant.user_rating.aggregate_rating,
-      ratingT: element.restaurant.user_rating.rating_text
+      ratingT: element.restaurant.user_rating.rating_text,
+
 
     })
 
@@ -52,9 +55,9 @@ const restaurantList = (Alist) => {
 
 const showRestaurant = (aList) => {
   const gridBox = document.getElementById('gridRestaurant')
-  aList.forEach((item) => {
+  aList.forEach((item, index, arr) => {
     let offers = item.offers.map(offer => `<span> ${offer}</span>`);
-    gridBox.innerHTML += `<article><img src="${item.photo}"><p>${item.name}</p>
+    gridBox.innerHTML += `<article id="art${item.id}"><img src="${item.photo}"><p>${item.name}</p>
     <p>${offers}</p>
     <p>${item.rating}/5</p><p>${item.price} </p></article>`
 
@@ -66,16 +69,18 @@ const review = (number) => {
     .then(res => res.json())
     .then(json => {
       console.log(json)
-
-      const myReviews = reviewObject(json)
+      //const restaurantId = number
+      const myReviews = reviewObject(json, number)
+      showRev(myReviews)
 
     })
 
 }
 
-review("16566183")
-const reviewObject = (object) => {
+
+const reviewObject = (object, idN) => {
   const newList = []
+  newList.push(idN)
   newList.push(object.reviews_count)
   const reviewList = object.user_reviews
   reviewList.forEach((item) => {
@@ -90,3 +95,21 @@ const reviewObject = (object) => {
   console.log(newList)
   return newList
 }
+
+const showRev = (alist) => {
+  const id = `art${alist[0]}`
+  console.log(id)
+  const myBox = document.getElementById(id)
+  console.log(myBox)
+  myBox.innerHTML += `<h3>Reviews</h3>`
+  alist.forEach((item, index) => {
+    if (index > 1) {
+      myBox.innerHTML += `<p>Rating: ${item.ratingT}, User: ${item.name}, Date: ${item.date}</p>`
+    }
+
+
+
+  })
+
+}
+
