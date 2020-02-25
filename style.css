@@ -4,6 +4,24 @@
   box-sizing: border-box;
 }
 
+h1 {
+padding-top: 2vh;
+padding-left: 3vh;
+font-family: 'Julius Sans One';
+text-transform: uppercase;
+letter-spacing: 1vw;
+}
+
+.bottomBorder {
+  border-bottom: 2px solid black;
+  height: 10vh;
+}
+
+
+
+.bookButton {
+  margin: 2vh;
+}
 
 .container {
   display: flex;
@@ -14,7 +32,7 @@
 }
 
 .small-card {
-  width: 20vw;
+  width: 90vw;
   height: 40vh;
   margin: 1vw 1vh;
 }
@@ -22,5 +40,39 @@
 img {
   object-fit: cover;
   height: 30vh;
-  width: 20vw;
+  width: 90vw;
+}
+
+@media (min-width : 668px){
+  .small-card {
+  width: 40vw;
+  height: 40vh;
+  margin: 1vw 1vh;
+}
+img {
+  object-fit: cover;
+  height: 30vh;
+  width: 40vw;
+}
+}
+@media (min-width : 1024px){
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+    justify-content: center;
+  }
+  
+  .small-card {
+    width: 20vw;
+    height: 40vh;
+    margin: 1vw 1vh;
+  }
+  
+  img {
+    object-fit: cover;
+    height: 30vh;
+    width: 20vw;
+  }
 }

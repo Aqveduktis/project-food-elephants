@@ -7,7 +7,11 @@ const today = document.getElementById('currentWeather')
 const CityId = 260;
 const CousineId = 168;
 const apiKey = "6ce41007f9563dde23befa59a0baa050";
+const filterBook = document.getElementById('bookClicked')
+const clearBtn = document.getElementById('resetBtn')
+const gridBox = document.getElementById('gridRestaurant')
 
+let myList
 
 const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${CityId}&entity_type=city&cuisines=${CousineId}&start=0&count=20`
 
@@ -38,7 +42,6 @@ const restaurantList = (Alist) => {
       offers: element.restaurant.highlights,
       rating: element.restaurant.user_rating.aggregate_rating,
       ratingT: element.restaurant.user_rating.rating_text,
-      // delivery: element.restaurant.has_online_delivery,
       bookTable: element.restaurant.is_table_reservation_supported
     })
 
@@ -51,7 +54,6 @@ const restaurantList = (Alist) => {
 }
 
 const showRestaurant = (aList) => {
-  const gridBox = document.getElementById('gridRestaurant')
   aList.forEach((item) => {
     let offers = item.offers.map(offer => `<span> ${offer}</span>`);
     gridBox.innerHTML += `<article class="small-card">
@@ -63,23 +65,44 @@ const showRestaurant = (aList) => {
       <p>${item.name}</p>
       <!-- <p>${offers}</p> -->
       <p>${item.rating}/5</p><p>${item.price} </p>
-      <p>${item.bookTable}</p>
+      
     </section>
-    
     </article>`
-    bookFilter(aList)
-    
   })
 }
 
-
-
+const clearFunction = () => {
+  location.reload()
+}
 
 const bookFilter = (arr) => {
   const bookableTables = arr.filter((item) => {
     return item.bookTable == 1
+    
   })
   console.log(bookableTables)
+
+  gridBox.innerHTML = ''
+  bookableTables.forEach((item) => {
+    let offers = item.offers.map(offer => `<span> ${offer}</span>`);
+    gridBox.innerHTML += `<article class="small-card">
+    <section>
+      <img src="${item.photo}">
+    </section>
+    
+    <section>
+      <p>${item.name}</p>
+      <!-- <p>${offers}</p> -->
+      <p>${item.rating}/5</p><p>${item.price} </p>
+      
+    </section>
+    
+    </article>`
+    
+  })
+
   return bookableTables
-  
 }
+// filterBook.addEventListener('click', bookFilter(aList))
+filterBook.addEventListener('click', () => bookFilter(myList))
+clearBtn.addEventListener('click', () => clearFunction())
