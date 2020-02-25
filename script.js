@@ -37,8 +37,9 @@ const restaurantList = (Alist) => {
       photo: element.restaurant.featured_image,
       offers: element.restaurant.highlights,
       rating: element.restaurant.user_rating.aggregate_rating,
-      ratingT: element.restaurant.user_rating.rating_text
-
+      ratingT: element.restaurant.user_rating.rating_text,
+      // delivery: element.restaurant.has_online_delivery,
+      bookTable: element.restaurant.is_table_reservation_supported
     })
 
   });
@@ -55,7 +56,9 @@ const showRestaurant = (aList) => {
     let offers = item.offers.map(offer => `<span> ${offer}</span>`);
     gridBox.innerHTML += `<article><img src="${item.photo}"><p>${item.name}</p>
     <p>${offers}</p>
-    <p>${item.rating}/5</p><p>${item.price} </p></article>`
-
+    <p>${item.rating}/5</p><p>${item.price} </p>
+    <p>${item.bookTable}</p>
+    </article>`
+    
   })
 }
