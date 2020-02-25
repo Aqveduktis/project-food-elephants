@@ -20,10 +20,13 @@ const fetchRestaurants = () => {
     .then(json => {
       console.log(json.restaurants)
       myList = restaurantList(json.restaurants)
-      showRestaurant(myList)
+      const listF = filterRate(myList)
 
+      showRestaurant(listF)
 
-      review("16566183")
+      reviewFunc(myList)
+      //review("16566183")
+
     })
 }
 
@@ -63,19 +66,24 @@ const showRestaurant = (aList) => {
 
   })
 }
-const review = (number) => {
-  const url = `https://developers.zomato.com/api/v2.1/reviews?res_id=${number}`
-  fetch(url, { headers: { "user-Key": apiKey } })
-    .then(res => res.json())
-    .then(json => {
-      console.log(json)
-      //const restaurantId = number
-      const myReviews = reviewObject(json, number)
-      showRev(myReviews)
+const reviewFunc = (aList) => {
 
-    })
+  aList.forEach((item) => {
+    let url = `https://developers.zomato.com/api/v2.1/reviews?res_id=${item.id}`
+    fetch(url, { headers: { "user-Key": apiKey } })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json)
+        //const restaurantId = number
+        const myReviews = reviewObject(json, item.id)
+        showRev(myReviews)
 
+      })
+
+  })
 }
+
+
 
 
 const reviewObject = (object, idN) => {
@@ -113,3 +121,30 @@ const showRev = (alist) => {
 
 }
 
+const filterRate = (arr) => {
+  const filterList = arr.filter((item) => {
+    return (parseFloat(item.rating) > 4.5)
+  })
+
+  console.log("filteredlist,", filterList)
+  return filterList
+
+}
+
+
+// const costFunction = (aList) => {
+//   costArray = []
+//   aList.forEach((item) => {
+//     costArray.push({ id: item.id, cost: item.cost })
+//   })  console.log(costArray)
+//   return costArray
+// }
+
+// const bookFilter = (arr) => {
+//   const bookableTables = arr.filter((item) => {
+//     return item.bookTable == 1
+
+//   })
+//   console.log(bookableTables)
+//   return bookableTables
+// }
