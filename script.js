@@ -54,11 +54,32 @@ const showRestaurant = (aList) => {
   const gridBox = document.getElementById('gridRestaurant')
   aList.forEach((item) => {
     let offers = item.offers.map(offer => `<span> ${offer}</span>`);
-    gridBox.innerHTML += `<article class="small-card"><img src="${item.photo}"><p>${item.name}</p>
-    <p>${offers}</p>
-    <p>${item.rating}/5</p><p>${item.price} </p>
-    <p>${item.bookTable}</p>
+    gridBox.innerHTML += `<article class="small-card">
+    <section>
+      <img src="${item.photo}">
+    </section>
+    
+    <section>
+      <p>${item.name}</p>
+      <!-- <p>${offers}</p> -->
+      <p>${item.rating}/5</p><p>${item.price} </p>
+      <p>${item.bookTable}</p>
+    </section>
+    
     </article>`
+    bookFilter(aList)
     
   })
+}
+
+
+
+
+const bookFilter = (arr) => {
+  const bookableTables = arr.filter((item) => {
+    return item.bookTable == 1
+  })
+  console.log(bookableTables)
+  return bookableTables
+  
 }
