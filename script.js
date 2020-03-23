@@ -11,7 +11,7 @@ const url = `https://developers.zomato.com/api/v2.1/search?entity_id=${CityId}&e
 //pricerangebuttons
 const filterPriceExp = document.getElementById('priceClickedExp')
 const filterPriceCheap = document.getElementById('priceClickedCheap')
-let myList
+let fullRestaurtants
 
 const fetchRestaurants = () => {
 
@@ -19,12 +19,12 @@ const fetchRestaurants = () => {
     .then(res => res.json())
     .then(json => {
       console.log(json.restaurants)
-      myList = restaurantList(json.restaurants)
+      fullRestaurtants = restaurantList(json.restaurants)
       //const listF = filterRate(myList)
 
-      showRestaurant(myList)
+      showRestaurant(fullRestaurtants)
 
-      reviewFunc(myList)
+      reviewFunc(fullRestaurtants)
       //review("16566183")
       object = document.getElementById('filter')
       object.addEventListener("click", (e) => {
@@ -68,12 +68,6 @@ const showRestaurant = (aList) => {
   })
 }
 
-// const listFunction = (fullList, smallList) => {
-//   const gridBox = document.getElementById('gridRestaurant')
-//   gridBox.innerHTML = ""
-
-// }
-
 
 const reviewFunc = (aList) => {
 
@@ -91,9 +85,6 @@ const reviewFunc = (aList) => {
 
   })
 }
-
-
-
 
 const reviewObject = (object, idN) => {
   const newList = []
@@ -211,7 +202,7 @@ const clearFunction = () => {
 const bookFilter = (arr) => {
   const bookableTables = arr.filter((item) => {
     return item.bookTable == 1
-    
+
   })
   gridBox.innerHTML = ''
   bookableTables.forEach((item) => {
